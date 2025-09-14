@@ -513,6 +513,19 @@ body:not(.user-is-tabbing) a:focus {
     }
 }
 
+/* fade effects */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px); /* slowly appears*/
+    transition: all 0.8s ease-out;
+  }
+  
+  .fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
 /* --------------------------------------- */
 /* ----- Clients ----- */
 /* --------------------------------------- */
