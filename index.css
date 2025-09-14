@@ -342,8 +342,16 @@ body:not(.user-is-tabbing) a:focus {
 }
 
 .nav__items {
+    position: fixed; /* to let stayin top */
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
+    justify-content: flex-end; /* links will stay in right side */
     list-style: none;
+    background: rgb(0, 0, 0); /* optional background */
+    padding: 15px 40px;
+    z-index: 1000;
 }
 
 .nav__item:not(:last-child) {
