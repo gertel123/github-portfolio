@@ -113,10 +113,10 @@ const nextBtn = document.querySelector('.lightbox .next');
 
 let currentIndex = 0;
 
-// Open lightbox kapag image ang i-click
+// Open lightbox
 images.forEach((img, index) => {
   img.addEventListener('click', () => {
-    lightbox.style.display = 'flex';
+    lightbox.classList.add('show');
     lightboxImg.src = img.src;
     currentIndex = index;
   });
@@ -124,7 +124,7 @@ images.forEach((img, index) => {
 
 // Close button
 closeBtn.addEventListener('click', () => {
-  lightbox.style.display = 'none';
+  lightbox.classList.remove('show');
 });
 
 // Next button
@@ -138,6 +138,4 @@ prevBtn.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   lightboxImg.src = images[currentIndex].src;
 });
-
-
 // Carousel End
