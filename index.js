@@ -68,3 +68,76 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 // fade effects end
+
+// Carousel start
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".slide");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+  let index = 0;
+
+  function showSlide(i) {
+    slides.forEach((slide, idx) => {
+      slide.classList.remove("active");
+      if (idx === i) slide.classList.add("active");
+    });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  });
+
+  prevBtn.addEventListener("click", () => {
+    index = (index - 1 + slides.length) % slides.length;
+    showSlide(index);
+  });
+
+  // Start with first slide
+  showSlide(index);
+
+  // Auto slide every 5 seconds
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  }, 5000);
+});
+
+// If you select one of the image in the carousels it will popup
+const images = document.querySelectorAll('.carousel img'); // lahat ng carousel images
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.lightbox .close');
+const prevBtn = document.querySelector('.lightbox .prev');
+const nextBtn = document.querySelector('.lightbox .next');
+
+let currentIndex = 0;
+
+// Open lightbox kapag image ang i-click
+images.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+    currentIndex = index;
+  });
+});
+
+// Close button
+closeBtn.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
+// Next button
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  lightboxImg.src = images[currentIndex].src;
+});
+
+// Prev button
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  lightboxImg.src = images[currentIndex].src;
+});
+
+
+// Carousel End
