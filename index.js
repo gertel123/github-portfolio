@@ -71,36 +71,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Carousel start
 document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll(".slide");
-  const prevBtn = document.querySelector(".prev");
-  const nextBtn = document.querySelector(".next");
-  let index = 0;
+  // Hanapin lahat ng carousel container
+  document.querySelectorAll(".carousel").forEach(carousel => {
+    const slides = carousel.querySelectorAll(".slide");
+    const prevBtn = carousel.querySelector(".prev");
+    const nextBtn = carousel.querySelector(".next");
+    let index = 0;
 
-  function showSlide(i) {
-    slides.forEach((slide, idx) => {
-      slide.classList.remove("active");
-      if (idx === i) slide.classList.add("active");
+    function showSlide(i) {
+      slides.forEach((slide, idx) => {
+        slide.classList.remove("active");
+        if (idx === i) slide.classList.add("active");
+      });
+    }
+
+    // Next button
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
     });
-  }
 
-  nextBtn.addEventListener("click", () => {
-    index = (index + 1) % slides.length;
+    // Prev button
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    });
+
+    // Start with first slide
     showSlide(index);
+
+    // Auto slide every 5 seconds (per carousel)
+    setInterval(() => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }, 5000);
   });
-
-  prevBtn.addEventListener("click", () => {
-    index = (index - 1 + slides.length) % slides.length;
-    showSlide(index);
-  });
-
-  // Start with first slide
-  showSlide(index);
-
-  // Auto slide every 5 seconds
-  setInterval(() => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-  }, 5000);
 });
 
 // If you select one of the image in the carousels it will popup
