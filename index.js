@@ -138,4 +138,28 @@ prevBtn.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   lightboxImg.src = images[currentIndex].src;
 });
+
+// Carousel Caption
+const captionBox = document.getElementById("carousel-caption");
+
+function updateCaption(index) {
+  captionBox.textContent = images[index].alt;
+}
+
+// initialize caption
+updateCaption(currentIndex);
+
+// update on next/prev
+nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  showSlide(currentIndex);
+  updateCaption(currentIndex);
+});
+
+prevBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  showSlide(currentIndex);
+  updateCaption(currentIndex);
+});
+
 // Carousel End

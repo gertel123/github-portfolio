@@ -599,6 +599,17 @@ body:not(.user-is-tabbing) a:focus {
     right: 5px;
   }
 
+  .carousel-caption {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    background: rgba(0,0,0,0.6);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
   /* Popup images Lightbox overlay  */
 .lightbox {
     position: fixed;
@@ -645,7 +656,7 @@ body:not(.user-is-tabbing) a:focus {
     top: 20px;
     right: 30px;
     color: white;
-    font-size: 2rem;
+    font-size: 5rem;
     cursor: pointer;
   }
   
