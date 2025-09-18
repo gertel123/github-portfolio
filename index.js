@@ -124,7 +124,27 @@ images.forEach((img, index) => {
     lightbox.classList.add('show');
     lightboxImg.src = img.src;
     currentIndex = index;
+    scale = 1; // reset Zoom
+    lightboxImg.style.transform = `scale(${scale})`;
   });
+});
+
+// Zoom in / zoom out with scroll
+lightbox.addEventListener("wheel", (e) => {
+  e.preventDefault();
+  if (e.deltaY < 0) {
+    // scroll up = zoom in
+    scale += 0.1;
+  } else {
+    // scroll down = zoom out
+    scale -= 0.1;
+  }
+
+  // Limit zoom range
+  if (scale < 0.5) scale = 0.5;
+  if (scale > 3) scale = 3;
+
+  lightboxImg.style.transform = `scale(${scale})`;
 });
 
 // Close button
@@ -166,5 +186,6 @@ prevBtn.addEventListener("click", () => {
   showSlide(currentIndex);
   updateCaption(currentIndex);
 });
+
 
 // Carousel End
