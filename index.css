@@ -412,8 +412,8 @@ body:not(.user-is-tabbing) a:focus {
 /* --------------------------------------- */
 
 .header {
-    background: linear-gradient(rgba(0,0,0, .1), rgba(0,0,0, .4)), 
-        url('./images/header.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.637)), 
+        url('./images/davao\ city.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
@@ -618,17 +618,17 @@ body:not(.user-is-tabbing) a:focus {
     text-align: center;
     color: #fff;
     font-size: 16px;
-    margin-top: 10px;
-    background: rgba(0,0,0,0.6);
-    padding: 5px 10px;
+    margin-top: 15px;
+    /* background: rgba(0,0,0,0.6);
+    padding: 5px 5px;
     border-radius: 5px;
-    display: inline-block;
+    display: inline-block; */
   }
 
   /* Popup images Lightbox overlay  */
   .lightbox {
     position: fixed;
-    z-index: 9999;
+    z-index: 1000;
     top: 0;
     left: 0;
     width: 100%;
@@ -656,10 +656,33 @@ body:not(.user-is-tabbing) a:focus {
     max-height: 80%;
     border-radius: 10px;
     transform: scale(0.9);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease-in-out;
     opacity: 0;
     cursor: grab;   /* Zoom in and out feature using mouse roller */
 }
+
+.zoom-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; /* nakatago by default */
+  }
+  
+  .zoom-controls button {
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .zoom-controls button:hover {
+    background: rgba(0,0,0,0.9);
+  }
 
 /* Animate image zoom + fade */
 .lightbox.show .lightbox-content {

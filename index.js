@@ -115,8 +115,13 @@ const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.lightbox .close');
 const prevBtn = document.querySelector('.lightbox .prev');
 const nextBtn = document.querySelector('.lightbox .next');
+const zoomControls = document.getElementById("zoom-controls");
+const zoomInBtn = document.getElementById("zoom-in");
+const zoomOutBtn = document.getElementById("zoom-out");
 
 let currentIndex = 0;
+let isDragging = false;
+let startX, startY, moveX = 0, moveY = 0;
 
 // Open lightbox
 images.forEach((img, index) => {
@@ -124,8 +129,15 @@ images.forEach((img, index) => {
     lightbox.classList.add('show');
     lightboxImg.src = img.src;
     currentIndex = index;
+
     scale = 1; // reset Zoom
     lightboxImg.style.transform = `scale(${scale})`;
+
+    moveX = 0; // Moving zoom in
+    moveX = 0; // Moving zoom in
+    updateTransform();
+    zoomControls.style.display = "none"; // reset controls
+    
   });
 });
 
@@ -144,8 +156,60 @@ lightbox.addEventListener("wheel", (e) => {
   if (scale < 0.5) scale = 0.5;
   if (scale > 3) scale = 3;
 
+  updateTransform();
+  toggleZoomControls();
+
   lightboxImg.style.transform = `scale(${scale})`;
 });
+
+// Manual zoom buttons
+zoomInBtn.addEventListener("click", () => {
+  scale = Math.min(scale + 0.1, 3);
+  updateTransform();
+  toggleZoomControls();
+});
+
+zoomOutBtn.addEventListener("click", () => {
+  scale = Math.max(scale - 0.1, 1);
+  updateTransform();
+  toggleZoomControls();
+});
+
+// Drag to move
+lightboxImg.addEventListener("mousedown", (e) => {
+  if (scale > 1) {
+    isDragging = true;
+    startX = e.clientX - moveX;
+    startY = e.clientY - moveY;
+    lightboxImg.style.cursor = "grabbing";
+  }
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+  moveX = e.clientX - startX;
+  moveY = e.clientY - startY;
+  updateTransform();
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+  lightboxImg.style.cursor = "grab";
+});
+
+// Helpers
+function updateTransform() {
+  lightboxImg.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
+}
+
+function toggleZoomControls() {
+  if (scale > 1) {
+    zoomControls.style.display = "block";
+  } else {
+    zoomControls.style.display = "none";
+  }
+}
+
 
 // Close button
 closeBtn.addEventListener('click', () => {
